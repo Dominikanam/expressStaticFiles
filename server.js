@@ -8,6 +8,9 @@ app.use('/store', (req, res, next) => {
     next();
 });
 
+app.set('view engine', 'pug');
+app.set('views','./views');
+
 app.get('/', (req, res) => {
     res.sendFile('/index.html');
 });
@@ -22,6 +25,25 @@ app.get('/userform', (req, res) => {
 
 app.get('/store', (req, res) => {
     res.send('To jest sklep');
+});
+
+app.get('/first-template', (req, res) => {
+    res.render('first-template');
+});
+
+app.get('/dynamic-view', (req, res) => {
+    res.render('dynamic', {
+        name: "Moja dynamiczna strona",
+        url: "http://www.google.com"
+    });
+});
+
+app.get('/auth', (req, res) => {
+	res.render('auth');
+});
+
+app.get('/auth/google', (req, res) => {
+	res.render('auth-google');
 });
 
 var server = app.listen(3000, 'localhost', () => {
